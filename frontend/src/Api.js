@@ -1,13 +1,13 @@
 import axios from 'axios';
-import{handleSuccess, handleSuccess} from './utils';
+import{handleError} from './utils';
 
 export const createBlog = async(blog)=>{
     try{
-        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}blog/createUser`, blog, {
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}blog/create`, blog, {
             headers:{
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'multipart/form-data'
             },
-        }) ;
+        });
         return response.data;
     }catch(err){
         return handleError('error using creating blog..');
@@ -15,13 +15,13 @@ export const createBlog = async(blog)=>{
 }
 export const fetchBlog = async()=>{
     try{
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}blog/fetchUsers`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}blog/get`, {
             headers:{
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'multipart/form-data'
             },
 
         });
-        return response.data;
+        return response.data.data;
 
     }catch(err){
         return handleError('error using fetching blog..');
@@ -30,9 +30,9 @@ export const fetchBlog = async()=>{
 
 export const updateUsers = async(id, blog)=>{
     try{
-        const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}blog/update/:${id}`, blog, {
+        const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}blog/update/${id}`, blog, {
             headers:{
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'multipart/form-data'
             }
         } );
         return response.data;
@@ -42,9 +42,9 @@ export const updateUsers = async(id, blog)=>{
 }
 export const deleteUsers = async(id)=>{
     try{
-        const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}blog/delete/:${id}`, {
+        const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}blog/delete/${id}`, {
             headers:{
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'multipart/form-data'
             }
         } );
         return response.data;
